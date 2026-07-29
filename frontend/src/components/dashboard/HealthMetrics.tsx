@@ -168,9 +168,16 @@ export default function HealthMetrics() {
     });
   };
 
-  const getLatest = (field: keyof HealthData) => {
+  const getTodayValue = (field: keyof HealthData, dateField?: keyof HealthData) => {
     if (!data.length) return '--';
-    const validEntries = data.filter(d => d[field] !== null && d[field] !== undefined);
+    const validEntries = data.filter(d => {
+      if (d[field] === null || d[field] === undefined) return false;
+      if (dateField && d[dateField]) {
+        return d[dateField] === today;
+      }
+      return (d.heartRateDate === today || d.spO2Date === today || d.stepsDate === today || d.sleepDate === today || d.caloriesDate === today);
+    });
+    
     if (!validEntries.length) return '--';
     validEntries.sort((a, b) => (b.id || 0) - (a.id || 0));
     return validEntries[0][field];
@@ -191,19 +198,19 @@ export default function HealthMetrics() {
   const uniqueDates = getUniqueDates();
 
   const metrics = [
-    { label: 'Heart Rate', value: getLatest('heartRate'), unit: 'bpm', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-100 dark:bg-rose-500/20' },
-    { label: 'SpO2 Level', value: getLatest('spO2'), unit: '%', icon: Droplets, color: 'text-cyan-500', bg: 'bg-cyan-100 dark:bg-cyan-500/20' },
-    { label: 'Daily Steps', value: getLatest('steps'), unit: 'steps', icon: Footprints, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-500/20' },
-    { label: 'Sleep', value: getLatest('sleepDuration'), unit: 'hrs', icon: BedDouble, color: 'text-indigo-500', bg: 'bg-indigo-100 dark:bg-indigo-500/20' },
-    { label: 'Calories Burned', value: getLatest('calories'), unit: 'kcal', icon: Flame, color: 'text-orange-500', bg: 'bg-orange-100 dark:bg-orange-500/20' },
-    { label: 'Current BMI', value: getLatest('bmi'), unit: '', icon: Activity, color: 'text-purple-500', bg: 'bg-purple-100 dark:bg-purple-500/20' },
+    { label: 'Heart Rate', value: getTodayValue('heartRate', 'heartRateDate'), unit: 'bpm', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-100 dark:bg-rose-500/20' },
+    { label: 'SpO2 Level', value: getTodayValue('spO2', 'spO2Date'), unit: '%', icon: Droplets, color: 'text-cyan-500', bg: 'bg-cyan-100 dark:bg-cyan-500/20' },
+    { label: 'Daily Steps', value: getTodayValue('steps', 'stepsDate'), unit: 'steps', icon: Footprints, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-500/20' },
+    { label: 'Sleep', value: getTodayValue('sleepDuration', 'sleepDate'), unit: 'hrs', icon: BedDouble, color: 'text-indigo-500', bg: 'bg-indigo-100 dark:bg-indigo-500/20' },
+    { label: 'Calories Burned', value: getTodayValue('calories', 'caloriesDate'), unit: 'kcal', icon: Flame, color: 'text-orange-500', bg: 'bg-orange-100 dark:bg-orange-500/20' },
+    { label: 'Current BMI', value: getTodayValue('bmi'), unit: '', icon: Activity, color: 'text-purple-500', bg: 'bg-purple-100 dark:bg-purple-500/20' },
   ];
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <Activity className="w-6 h-6 text-indigo-500" /> Vitals & Health Metrics
+          <Activity className="w-6 h-6 text-indigo-500" /> Today's Vitals & Metrics
         </h2>
         <div className="flex items-center gap-3">
           <button 
