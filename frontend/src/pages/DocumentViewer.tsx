@@ -81,11 +81,17 @@ export default function DocumentViewer() {
 
       {/* PDF Viewer using iframe */}
       <div className="flex-1 w-full relative">
-        <iframe 
-          src={`${fileUrl}#toolbar=0&navpanes=0`} 
-          className="w-full h-full border-none absolute inset-0"
-          title={document.title}
-        />
+        {fileUrl ? (
+          <iframe 
+            src={`${fileUrl}#toolbar=0&navpanes=0`} 
+            className="w-full h-full border-none absolute inset-0"
+            title={document.title}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-zinc-500">Document file not available or failed to upload.</p>
+          </div>
+        )}
       </div>
     </div>
   );
