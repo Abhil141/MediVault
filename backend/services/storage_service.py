@@ -1,8 +1,10 @@
-import cloudinary
-import cloudinary.uploader
+try:
+    import cloudinary
+    import cloudinary.uploader
+except ImportError:
+    cloudinary = None
+
 from core.config import settings
-import os
-import shutil
 import os
 import shutil
 try:
