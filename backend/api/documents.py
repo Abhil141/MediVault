@@ -12,6 +12,8 @@ from schemas.document import DocumentResponse
 from api.deps import get_current_user
 from services.ai_service import ai_service
 from services.storage_service import storage_service
+from models.reminder import Reminder
+from models.share import ShareLink
 
 router = APIRouter()
 
@@ -105,6 +107,10 @@ def delete_document(
     if not document:
         raise HTTPException(status_code=404, detail="Document not found")
         
+    # Delete dependent records first to avoid foreign key constraints
+    db.query(Reminder).filter(Reminder.document_id == document_id).delete()
+    db.query(ShareLink).filter(ShareLink.document_id == document_id).delete()
+    
     db.delete(document)
     db.commit()
     return {"message": "Document deleted successfully"}
