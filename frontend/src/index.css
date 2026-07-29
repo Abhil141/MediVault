@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+
+  --color-background: var(--bg-color);
+  --color-foreground: var(--fg-color);
+  --color-card: var(--card-bg);
+  --color-border: var(--border-color);
+}
+
+:root {
+  --bg-color: #ffffff;
+  --fg-color: #09090b;
+  --card-bg: #ffffff;
+  --border-color: #e4e4e7;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  --bg-color: #09090b;
+  --fg-color: #fafafa;
+  --card-bg: #18181b;
+  --border-color: #27272a;
+}
+
+.bg-dots {
+  position: relative;
+  background-image: radial-gradient(circle, #00000015 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #00000045 2.5px, transparent 2.5px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(
+    circle 250px at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px),
+    black,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 250px at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px),
+    black,
+    transparent 100%
+  );
+}
+
+.dark .bg-dots {
+  background-image: radial-gradient(circle, #ffffff15 1px, transparent 1px);
+}
+
+.dark .bg-dots::before {
+  background-image: radial-gradient(circle, #ffffff45 2.5px, transparent 2.5px);
+}
+
+.mouse-glow {
+  background-image: radial-gradient(
+    600px circle at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px),
+    rgba(37, 99, 235, 0.03),
+    transparent 40%
+  );
+}
+
+.dark .mouse-glow {
+  background-image: radial-gradient(
+    600px circle at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px),
+    rgba(59, 130, 246, 0.04),
+    transparent 40%
+  );
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: "Inter", "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
