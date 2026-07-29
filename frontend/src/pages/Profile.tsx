@@ -147,7 +147,7 @@ export default function Profile() {
             <div className="w-32 h-32 rounded-full bg-white dark:bg-zinc-800 p-1.5 shadow-xl">
               <div className="w-full h-full rounded-full bg-slate-100 dark:bg-zinc-900 overflow-hidden flex items-center justify-center relative">
                 {profileData.profile_picture ? (
-                  <img src={`http://localhost:8000${profileData.profile_picture}`} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${profileData.profile_picture}`} alt="Profile" className="w-full h-full object-cover" />
                 ) : (
                   <User className="w-12 h-12 text-slate-400" />
                 )}

@@ -72,7 +72,7 @@ export default function Chatbot() {
     const fetchMessages = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:8000/api/chat/sessions/${currentSessionId}/messages`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions/${currentSessionId}/messages`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -141,7 +141,7 @@ export default function Chatbot() {
       }
 
       const response = await axios.post(
-        `http://localhost:8000/api/chat/sessions/${targetSessionId}/ask`,
+        `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions/${targetSessionId}/ask`,
         { message: userMessage.content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -196,7 +196,7 @@ export default function Chatbot() {
     if (editingTitle && editingTitle.trim()) {
       try {
         const token = localStorage.getItem('token');
-        await axios.put(`http://localhost:8000/api/chat/sessions/${sessionId}/rename`, 
+        await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions/${sessionId}/rename`, 
           { title: editingTitle.trim() }, 
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -297,7 +297,7 @@ export default function Chatbot() {
                          e.stopPropagation();
                          try {
                            const token = localStorage.getItem('token');
-                           await axios.delete(`http://localhost:8000/api/chat/sessions/${s.id}`, {
+                           await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions/${s.id}`, {
                              headers: { Authorization: `Bearer ${token}` }
                            });
                            const updatedSessions = sessions.filter(session => session.id !== s.id);

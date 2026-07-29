@@ -50,7 +50,7 @@ export default function DocumentViewer() {
     );
   }
 
-  const fileUrl = document.file_url.startsWith('/uploads') ? `http://localhost:8000${document.file_url}` : document.file_url;
+  const fileUrl = document.file_url.startsWith('/uploads') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${document.file_url}` : document.file_url;
 
   return (
     <div className="flex h-screen w-full flex-col bg-zinc-50 dark:bg-zinc-950 overflow-hidden">

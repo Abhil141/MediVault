@@ -77,7 +77,7 @@ export default function DocumentDetailsModal({ document, isOpen, onClose }: Docu
 
   const handleRemoveReminder = async (idx: number, reminderId: number) => {
     try {
-      await axios.put(`http://localhost:8000/api/reminders/${reminderId}/toggle`, {}, {
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reminders/${reminderId}/toggle`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAddedMeds(prev => {

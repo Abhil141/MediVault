@@ -126,7 +126,7 @@ export default function HealthMetrics() {
     confirmAction(`Are you sure you want to delete all health metrics recorded on ${dateStr}?`, async () => {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:8000/api/health-data/by-date?date=${dateStr}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/health-data/by-date?date=${dateStr}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success(`Data for ${dateStr} deleted successfully`);
@@ -141,7 +141,7 @@ export default function HealthMetrics() {
     confirmAction(`Are you sure you want to delete this specific health data entry?`, async () => {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:8000/api/health-data/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/health-data/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success(`Entry deleted successfully`);
@@ -156,7 +156,7 @@ export default function HealthMetrics() {
     confirmAction('WARNING: This will permanently delete ALL your health data history. Are you sure?', async () => {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:8000/api/health-data/`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/health-data/`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success("All health data cleared");

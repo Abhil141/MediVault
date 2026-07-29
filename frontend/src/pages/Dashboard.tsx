@@ -81,7 +81,7 @@ export default function Dashboard() {
 
   const toggleReminder = useMutation({
     mutationFn: async (id: number) => {
-      await axios.put(`http://localhost:8000/api/reminders/${id}/toggle`, {}, {
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reminders/${id}/toggle`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
     },

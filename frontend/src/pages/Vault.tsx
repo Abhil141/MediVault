@@ -67,7 +67,7 @@ export default function Vault() {
   const handleDelete = async (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      await axios.delete(`http://localhost:8000/api/documents/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Document deleted successfully');
