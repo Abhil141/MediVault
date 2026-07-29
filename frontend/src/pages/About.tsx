@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
-    <div className="max-w-7xl mx-auto py-8 px-6 sm:px-10 lg:px-16 font-sans">
+    <div className="max-w-7xl mx-auto py-2 px-6 sm:px-10 lg:px-16 font-sans">
       
       {/* Hero Section */}
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl mb-4 text-indigo-600 dark:text-indigo-400">
-          <Shield className="w-8 h-8" />
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center p-2.5 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl mb-3 text-indigo-600 dark:text-indigo-400">
+          <Shield className="w-7 h-7" />
         </div>
-        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl tracking-tight mb-3">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl tracking-tight mb-2">
           About MediVault
         </h1>
-        <p className="mt-3 text-base text-slate-600 dark:text-zinc-400 max-w-6xl mx-auto leading-relaxed">
+        <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-zinc-400 max-w-none mx-auto leading-relaxed">
           Your intelligent, secure, and comprehensive personal health record system. MediVault was built to bridge the gap between complex medical systems and patient accessibility, giving you the power to own, understand, and control your health data.
         </p>
       </div>
