@@ -25,7 +25,7 @@ export default function DocumentDetailsModal({ document, isOpen, onClose }: Docu
   useEffect(() => {
     if (isOpen && document) {
       setShareLink(null);
-      axios.get('http://localhost:8000/api/reminders/', {
+      axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reminders/`, {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         const activeMeds = res.data
@@ -59,7 +59,7 @@ export default function DocumentDetailsModal({ document, isOpen, onClose }: Docu
 
   const handleAddReminder = async (med: any, idx: number) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/reminders/', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reminders/`, {
         medicine_name: med.medicine_name,
         dosage: med.dosage,
         frequency: med.frequency,
@@ -95,7 +95,7 @@ export default function DocumentDetailsModal({ document, isOpen, onClose }: Docu
     setIsSharing(true);
     setShareLink(null);
     try {
-      const response = await axios.post('http://localhost:8000/api/shares/create', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/shares/create`, {
         document_id: document.id,
         expires_in_days: 7
       }, {

@@ -14,7 +14,7 @@ export default function DocumentViewer() {
   const { data: documents, isLoading } = useQuery({
     queryKey: ['documents'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:8000/api/documents/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data as Document[];

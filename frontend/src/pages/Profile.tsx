@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
@@ -31,7 +31,7 @@ export default function Profile() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:8000/api/profile/', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProfileData(res.data);
@@ -62,7 +62,7 @@ export default function Profile() {
     setIsChangingPassword(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.put('http://localhost:8000/api/auth/change-password', {
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/change-password`, {
         current_password: passwords.currentPassword,
         new_password: passwords.newPassword
       }, {
@@ -91,7 +91,7 @@ export default function Profile() {
         bio: profileData.bio
       };
       
-      await axios.put('http://localhost:8000/api/profile/', payload, {
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success("Profile updated successfully!");
@@ -113,7 +113,7 @@ export default function Profile() {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8000/api/profile/avatar', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/avatar`, formData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

@@ -34,7 +34,7 @@ export default function ComparisonModal({ doc1, doc2, isOpen, onClose }: Compari
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post('http://localhost:8000/api/documents/compare', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/compare`, {
         doc1_id: doc1!.id,
         doc2_id: doc2!.id
       }, {

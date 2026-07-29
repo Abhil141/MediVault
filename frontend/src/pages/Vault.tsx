@@ -42,7 +42,7 @@ export default function Vault() {
   const { data: documents, isLoading, refetch } = useQuery({
     queryKey: ['documents'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:8000/api/documents/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data as Document[];
@@ -88,7 +88,7 @@ export default function Vault() {
 
     try {
       const loadingToast = toast.loading('Uploading document...');
-      await axios.post('http://localhost:8000/api/documents/', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

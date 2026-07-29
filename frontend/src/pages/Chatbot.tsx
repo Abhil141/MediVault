@@ -40,7 +40,7 @@ export default function Chatbot() {
     const fetchSessions = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:8000/api/chat/sessions', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setSessions(res.data);
@@ -133,7 +133,7 @@ export default function Chatbot() {
       
       // Create session if it doesn't exist
       if (!targetSessionId) {
-        const sessionRes = await axios.post('http://localhost:8000/api/chat/sessions', {}, {
+        const sessionRes = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
         targetSessionId = sessionRes.data.id;
@@ -155,7 +155,7 @@ export default function Chatbot() {
       setMessages(prev => [...prev, botMessage]);
 
       // Refresh session list to update titles if this was the first message
-      const resList2 = await axios.get('http://localhost:8000/api/chat/sessions', {
+      const resList2 = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chat/sessions`, {
           headers: { Authorization: `Bearer ${token}` }
       });
       setSessions(resList2.data);

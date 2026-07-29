@@ -44,7 +44,7 @@ export default function HealthMetrics() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/health-data/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/health-data/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setData(response.data);
@@ -84,7 +84,7 @@ export default function HealthMetrics() {
         caloriesDay: formData.calories ? dayOfWeek : undefined,
       };
 
-      await axios.post('http://localhost:8000/api/health-data/', payload, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/health-data/`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

@@ -38,7 +38,7 @@ export default function Dashboard() {
     document.title = "Dashboard — MediVault";
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/auth/me', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (response.data && response.data.first_name) {
@@ -62,7 +62,7 @@ export default function Dashboard() {
   const { data: documents, isLoading: docsLoading } = useQuery({
     queryKey: ['documents'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:8000/api/documents/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/documents/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data as Document[];
@@ -72,7 +72,7 @@ export default function Dashboard() {
   const { data: reminders, isLoading: remindersLoading } = useQuery({
     queryKey: ['reminders'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:8000/api/reminders/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reminders/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data as Reminder[];
