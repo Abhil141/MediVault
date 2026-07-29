@@ -17,7 +17,7 @@ class RAGService:
             max_retries=1
         )
         self.embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/embedding-001", 
+            model="models/text-embedding-004", 
             google_api_key=settings.GEMINI_API_KEY
         )
         self.retrieval_chain = None
