@@ -7,6 +7,8 @@
 
 **MediVault** is an intelligent, secure, and comprehensive personal health record system powered by React, FastAPI, and Google's Gemini AI. It bridges the gap between complex medical systems and patient accessibility, giving you the power to own, understand, and easily manage your health data.
 
+### 🚀 [Try the Live Demo Here: medivault-health.vercel.app](https://medivault-health.vercel.app/)
+
 ---
 
 ## 🌟 Features
