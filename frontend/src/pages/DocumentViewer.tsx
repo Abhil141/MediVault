@@ -69,14 +69,16 @@ export default function DocumentViewer() {
             {document.title}
           </h1>
         </div>
-        <a 
-          href={fileUrl}
-          download
-          className="flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 dark:bg-brand-600 dark:hover:bg-brand-500 rounded-lg transition-colors shadow-sm"
-        >
-          <Download className="w-4 h-4 mr-2" />
-          Download PDF
-        </a>
+        {fileUrl && (
+          <a 
+            href={fileUrl}
+            download
+            className="flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 dark:bg-brand-600 dark:hover:bg-brand-500 rounded-lg transition-colors shadow-sm"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Download PDF
+          </a>
+        )}
       </div>
 
       {/* PDF Viewer using iframe */}
