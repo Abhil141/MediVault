@@ -32,33 +32,7 @@ export default function SharedDocumentView() {
     fetchDocument();
   }, [token]);
 
-  const [isDownloading, setIsDownloading] = useState(false);
-
-  const handleDownload = async () => {
-    if (!document) return;
-    setIsDownloading(true);
-    try {
-      const url = document.file_url?.startsWith('/uploads') 
-        ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${document.file_url}` 
-        : document.file_url;
-        
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      const link = window.document.createElement('a');
-      link.href = blobUrl;
-      link.download = `${document.title}.pdf`;
-      window.document.body.appendChild(link);
-      link.click();
-      window.document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-      console.error("Failed to download file:", err);
-    } finally {
-      setIsDownloading(false);
-    }
-  };
+  const downloadUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/shares/${token}/download`;
 
   if (loading) {
     return (
@@ -94,14 +68,13 @@ export default function SharedDocumentView() {
             </div>
             <span className="font-bold text-xl tracking-tight text-zinc-900">MediVault <span className="text-brand-600 font-normal">Secure Share</span></span>
           </div>
-          <button
-            onClick={handleDownload}
-            disabled={isDownloading}
-            className="flex items-center space-x-2 text-sm font-medium text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+          <a
+            href={downloadUrl}
+            className="flex items-center space-x-2 text-sm font-medium text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2 rounded-lg transition-colors"
           >
-            {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-            <span>{isDownloading ? "Downloading..." : "Download PDF"}</span>
-          </button>
+            <Download className="w-4 h-4" />
+            <span>Download PDF</span>
+          </a>
         </div>
       </div>
 
