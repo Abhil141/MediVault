@@ -1,10 +1,9 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_classic.chains import create_retrieval_chain
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from core.config import settings
@@ -17,7 +16,10 @@ class RAGService:
             temperature=0.3,
             max_retries=1
         )
-        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+        self.embeddings = GoogleGenerativeAIEmbeddings(
+            model="models/embedding-001", 
+            google_api_key=settings.GEMINI_API_KEY
+        )
         self.retrieval_chain = None
         self._initialize_knowledge_base()
 
