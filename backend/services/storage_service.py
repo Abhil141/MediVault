@@ -3,7 +3,12 @@ import cloudinary.uploader
 from core.config import settings
 import os
 import shutil
-import boto3
+import os
+import shutil
+try:
+    import boto3
+except ImportError:
+    boto3 = None
 
 class StorageService:
     def __init__(self):
