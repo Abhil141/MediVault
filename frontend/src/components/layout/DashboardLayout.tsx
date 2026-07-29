@@ -36,17 +36,17 @@ export default function DashboardLayout() {
         className={`group ${isCollapsed ? 'w-20' : 'w-72'} border-r border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex flex-col z-20 shadow-xl dark:shadow-none transition-all duration-300 relative shrink-0 absolute md:relative h-full`}
       >
         {/* Brand Header */}
-        <div className={`p-6 border-b border-slate-100 dark:border-zinc-800/80 flex items-center h-[88px] relative ${isCollapsed ? 'justify-center px-0' : 'justify-start'}`}>
+        <div className={`p-6 border-b border-slate-100 dark:border-zinc-800/80 flex items-center h-[96px] relative ${isCollapsed ? 'justify-center px-0' : 'justify-start'}`}>
           <Link to="/" className={`flex items-center space-x-3 hover:opacity-90 transition-opacity ${isCollapsed ? 'ml-0' : 'ml-2'}`}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-800 to-purple-700 flex items-center justify-center shadow-md shadow-indigo-900/30 dark:shadow-indigo-900/50 text-white shrink-0">
-              <Activity className="w-5 h-5 animate-pulse" />
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-800 to-purple-700 flex items-center justify-center shadow-md shadow-indigo-900/30 dark:shadow-indigo-900/50 text-white shrink-0">
+              <Activity className="w-6 h-6 animate-pulse" />
             </div>
             {!isCollapsed && (
               <div className="transition-opacity duration-200 min-w-0">
-                <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-800 dark:from-white dark:via-indigo-200 dark:to-slate-300 bg-clip-text text-transparent truncate block">
+                <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-800 dark:from-white dark:via-indigo-200 dark:to-slate-300 bg-clip-text text-transparent truncate block">
                   MediVault
                 </span>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 truncate">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 truncate">
                   Secure Health Vault
                 </p>
               </div>
@@ -54,7 +54,7 @@ export default function DashboardLayout() {
           </Link>
           <button 
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="absolute -right-3 top-8 p-1 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 text-slate-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all cursor-pointer shadow-sm z-50 flex items-center justify-center opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute -right-3 top-9 p-1 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 text-slate-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all cursor-pointer shadow-sm z-50 flex items-center justify-center opacity-0 group-hover:opacity-100 focus:opacity-100"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -62,7 +62,7 @@ export default function DashboardLayout() {
         </div>
         
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-6 space-y-2 overflow-y-auto overflow-x-hidden">
+        <nav className="flex-1 px-3 py-6 space-y-1.5 overflow-y-auto overflow-x-hidden">
           {!isCollapsed && (
             <p className="px-3 text-xs font-semibold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-2">
               Menu
@@ -76,14 +76,14 @@ export default function DashboardLayout() {
                 key={item.path}
                 to={item.path}
                 title={isCollapsed ? item.name : undefined}
-                className={`group flex items-center ${isCollapsed ? 'justify-center py-3.5 px-2' : 'justify-between px-4 py-3'} text-sm font-semibold rounded-xl transition-all duration-200 ${
+                className={`group flex items-center ${isCollapsed ? 'justify-center py-3 px-2' : 'justify-between px-4 py-2.5'} text-sm font-semibold rounded-xl transition-all duration-200 ${
                   isActive
                     ? 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white shadow-lg shadow-indigo-500/25'
                     : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-900/60 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <div className="flex items-center">
-                  <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 shrink-0 ${!isCollapsed ? 'mr-3.5' : ''} ${isActive ? 'text-white' : 'text-slate-400 dark:text-zinc-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'}`} />
+                  <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 shrink-0 ${!isCollapsed ? 'mr-3' : ''} ${isActive ? 'text-white' : 'text-slate-400 dark:text-zinc-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'}`} />
                   {!isCollapsed && <span className="truncate">{item.name}</span>}
                 </div>
               </Link>
