@@ -48,16 +48,14 @@ class StorageService:
                     return f"{self.aws_endpoint}/{self.aws_bucket}/{filename}"
                 return f"https://{self.aws_bucket}.s3.{self.aws_region}.amazonaws.com/{filename}"
             except Exception as e:
-                print(f"S3 upload failed: {e}")
-                return ""
+                print(f"S3 upload failed: {e}. Falling back to local storage.")
                 
         if self.use_cloudinary:
             try:
                 result = cloudinary.uploader.upload(file_path)
                 return result.get("secure_url")
             except Exception as e:
-                print(f"Cloudinary upload failed: {e}")
-                return ""
+                print(f"Cloudinary upload failed: {e}. Falling back to local storage.")
                 
         # Local fallback
         dest_path = f"uploads/{filename}"
