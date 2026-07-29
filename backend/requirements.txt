@@ -14,5 +14,6 @@ email-validator==2.1.1
 langchain
 langchain-google-genai
 langchain-community
+langchain-classic
 faiss-cpu
 beautifulsoup4
