@@ -35,7 +35,7 @@ export default function Dashboard() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    document.title = "Dashboard — MediVault";
+    document.title = "Dashboard | MediVault";
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/me`, {

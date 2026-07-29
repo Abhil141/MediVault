@@ -67,8 +67,8 @@ export default function SharedDocumentView() {
             <span className="font-bold text-xl tracking-tight text-zinc-900">MediVault <span className="text-brand-600 font-normal">Secure Share</span></span>
           </div>
           <a
-            href={document.file_url?.startsWith('/uploads') ? `http://localhost:8000${document.file_url}` : document.file_url}
-            download
+            href={document.file_url?.startsWith('/uploads') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${document.file_url}` : document.file_url}
+            download={`${document.title}.pdf`}
             className="text-sm font-medium text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2 rounded-lg transition-colors"
           >
             Download PDF

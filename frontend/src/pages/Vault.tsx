@@ -36,7 +36,7 @@ export default function Vault() {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Vault — MediVault";
+    document.title = "Vault | MediVault";
   }, []);
 
   const { data: documents, isLoading, refetch } = useQuery({

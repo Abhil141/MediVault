@@ -27,7 +27,7 @@ export default function DocumentViewer() {
     if (document) {
       window.document.title = `${document.title} - MediVault`;
     } else {
-      window.document.title = "Document Viewer - MediVault";
+      window.document.title = "Document Viewer | MediVault";
     }
   }, [document]);
 
