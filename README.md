@@ -18,7 +18,9 @@
 - 🧠 **AI Insight Extraction**: Automatically processes uploaded documents using Google's Gemini AI to extract key clinical insights, medications, and important medical terms.
 - 💬 **MediHelp AI Chatbot**: An intelligent, RAG-powered clinical assistant. Ask complex medical questions about your personal records or general health, referenced securely against public health data.
 - ⚖️ **Clinical Comparison**: Select any two medical records and generate a side-by-side AI clinical comparison to track health progress over time.
-- 📱 **Fully Responsive UI**: A beautifully crafted, modern glassmorphism interface that works seamlessly on desktop and mobile devices.
+- 📈 **Health Timeline & Metrics**: Visualize your extracted health data over time and track essential metrics on a beautiful dashboard.
+- 🔗 **Secure Sharing**: Generate secure, time-limited tokens to share specific medical documents with doctors or family members.
+- 📱 **Fully Responsive UI**: A beautifully crafted, modern glassmorphism interface with full Dark Mode support that works seamlessly on desktop and mobile devices.
 
 ---
 
@@ -33,10 +35,10 @@
 
 ### Backend
 - **Framework**: FastAPI (Python)
-- **Database**: SQLite with SQLAlchemy ORM
+- **Database**: PostgreSQL (via Supabase) with SQLAlchemy ORM
 - **AI Integration**: LangChain & Google Gemini API
 - **Authentication**: JWT (JSON Web Tokens) & Passlib (bcrypt)
-- **File Handling**: Multipart form data with local secure storage
+- **File Handling**: Cloudinary (for cloud media storage) with local storage fallback
 
 ---
 
@@ -48,6 +50,7 @@ Follow these steps to set up the project locally on your machine.
 - Node.js (v16 or higher)
 - Python (v3.10 or higher)
 - A Google Gemini API Key
+- A PostgreSQL Database (e.g., Supabase)
 
 ### 1. Clone the repository
 ```bash
@@ -64,10 +67,13 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Create a `.env` file in the `backend` directory and add your API keys:
+Create a `.env` file in the `backend` directory and add your API keys and Database URL:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 SECRET_KEY=your_secure_jwt_secret_key
+DATABASE_URL=postgresql://user:password@host:5432/postgres
+# Optional (falls back to local storage if not provided):
+CLOUDINARY_URL=cloudinary://api_key:api_secret@cloud_name
 ```
 
 Start the FastAPI server:
@@ -81,6 +87,11 @@ Open a new terminal, navigate to the frontend directory, and install dependencie
 ```bash
 cd frontend
 npm install
+```
+
+Create a `.env` file in the `frontend` directory so the React app knows where to find the backend:
+```env
+VITE_API_URL=http://localhost:8000
 ```
 
 Start the Vite development server:
